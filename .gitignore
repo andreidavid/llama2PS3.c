@@ -1,0 +1,6 @@
+build/
+*.self
+*.elf
+*.o
+stories15M.bin
+run.c

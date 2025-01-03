@@ -12,9 +12,10 @@ TITLE       :=  LLama PS3
 APPID       :=  LLAMA001
 CONTENTID   :=  UP0001-$(APPID)_00-0000000000000000
 
-# Optimization flags and warnings
-CFLAGS      =  -O2 -Wall -mcpu=cell $(MACHDEP) $(INCLUDE)
-CXXFLAGS    =  $(CFLAGS)
+# C specific flags
+CFLAGS      =  -std=gnu89 -O2 -Wall -mcpu=cell $(MACHDEP) $(INCLUDE)
+# Add debug info flags if needed
+#CFLAGS     +=  -g
 
 # Linker flags
 LDFLAGS     =  $(MACHDEP) -Wl,-Map,$(notdir $@).map
@@ -23,14 +24,13 @@ LDFLAGS     =  $(MACHDEP) -Wl,-Map,$(notdir $@).map
 LIBS        :=  -lrsx -lgcm_sys -lio -lsysutil -lrt -llv2 -lm
 
 # Source files
-CFILES      :=  
-CPPFILES    :=  llama_ps3.cpp \
-                transformer.cpp \
-                math_utils.cpp \
-                memory_utils.cpp \
-                sampler.cpp \
-                tokenizer.cpp \
-                rsxutil.cpp
+CFILES      :=  llama_ps3.c \
+                transformer.c \
+                math_utils.c \
+                memory_utils.c \
+                sampler.c \
+                tokenizer.c \
+                rsxutil.c
 
 ifneq ($(BUILD),$(notdir $(CURDIR)))
 
@@ -44,10 +44,10 @@ export DEPSDIR  :=  $(CURDIR)/$(BUILD)
 export BUILDDIR :=  $(CURDIR)/$(BUILD)
 
 # Object files
-OFILES      :=  $(CPPFILES:.cpp=.o) $(CFILES:.c=.o)
+OFILES      :=  $(CFILES:.c=.o)
 
-# Choose compiler based on file types
-export LD   :=  $(CXX)
+# Choose C compiler
+export LD   :=  $(CC)
 
 export OFILES    :=  $(OFILES)
 

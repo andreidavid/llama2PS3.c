@@ -26,7 +26,7 @@ export PATH=$PATH:$PS3DEV/spu/bin
 
 2. Clone and build:
 ```bash
-git clone [repository-url]
+git clone [https://github.com/andreidavid/llama2PS3.c.git]
 cd llama-ps3
 make
 ```
@@ -70,6 +70,7 @@ ps3load hello_world.self
 - Careful pointer management for struct fields
 
 ## Current Status
+- [x] Pure C implementation
 - [x] Basic model loading and validation
 - [x] Forward pass implementation
 - [x] Memory management optimized for PS3
